@@ -1,120 +1,13 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
-          target="_blank"
-          rel="noopener"
-          >typescript</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa"
-          target="_blank"
-          rel="noopener"
-          >pwa</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest"
-          target="_blank"
-          rel="noopener"
-          >unit-jest</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-e2e-cypress"
-          target="_blank"
-          rel="noopener"
-          >e2e-cypress</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+    <div id="title">
+      <span>Mircale STARS</span>
+    </div>
+    <div>
+      <div class="start" id="start1"></div>
+      <div class="start" id="start2"></div>
+      <div class="start" id="start3"></div>
+    </div>
   </div>
 </template>
 
@@ -128,19 +21,104 @@ export default class HelloWorld extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+<style scoped lang="less">
+// 浏览器宽度
+
+@windowWidth: 2000;
+
+//  + Math.floor(Math.random() * (100000 - 900000) + 900000)
+
+.mixin(@n) when(@n > 0) {
+  box-shadow+: ~`Math.round(Math.random() * @{windowWidth}) + "px" + " " +
+    Math.round(Math.random() * @{windowWidth}) + "px #fff"`;
+  .mixin((@n - 1));
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+#start1 {
+  .mixin(700);
+  width: 2px;
+  height: 2px;
+  animation: star-ani 50s linear infinite;
+  animation-delay: -10s;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+#start2 {
+  .mixin(200);
+  width: 4px;
+  height: 8px;
+  border-radius: 100%;
+  animation: star-ani 100s linear infinite;
+  animation-delay: -8s;
 }
-a {
-  color: #42b983;
+#start3 {
+  .mixin(100);
+  width: 3px;
+  height: 6px;
+  border-radius: 10%;
+  animation: star-ani 150s linear infinite;
+  animation-delay: -5s;
+}
+#title {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: courier;
+  font-size: 102px;
+}
+
+.start {
+  position: relative;
+  // animation: star-ani 4s linear infinite;
+  z-index: 2;
+}
+.start::after {
+  content: "";
+  display: block;
+  top: 0px;
+  left: 4px;
+  border: 0px solid #fff;
+  border-width: 0px 90px 2px 90px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.3);
+  transform: rotate(-45deg) translate3d(1px, 3px, 0);
+  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform-origin: 0% 100%;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+    transform: scale(0) translate3d(0, 0, 0);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+@keyframes star-ani {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate3d(0, 0, 0);
+  }
+  20% {
+    opacity: 0.8;
+    transform: scale(0.2) translate3d(100px, 0px, 0);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(0.4) translate3d(200px, 50px, 0);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(0.6) translate3d(300px, 100px, 0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1) translate3d(350px, 150px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2) translate3d(-400px, 380px, 0);
+  }
 }
 </style>

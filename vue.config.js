@@ -31,7 +31,11 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
-    loaderOptions: {},
+    loaderOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    },
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
@@ -61,7 +65,7 @@ module.exports = {
     host: '0.0.0.0',
     port: 8080,
     https: false,
-    hotOnly: false,
+    hotOnly: true,
     proxy: null, // 设置代理
     before: app => { }
   },
